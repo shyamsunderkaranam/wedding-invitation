@@ -71,7 +71,8 @@ body, html {
     align-items: center;
     justify-content: center;
     text-align: center;
-    transition: transform 1s ease-in-out cubic-bezier(0.755, 0.05, 0.855, 0.06);
+    /* transition: transform 1s ease-in-out cubic-bezier(0.755, 0.05, 0.855, 0.06); */
+    transition: transform 1s ease-in-out, opacity 1s ease-in-out;
 
   }
   
@@ -139,6 +140,51 @@ body, html {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
   } */
   
+  .detail-card h3, .detail-card p {
+    font-family: 'Libre Baskerville', serif;
+    color: #5d3a00;
+  }
+  
+  .detail-card h3 {
+    font-size: 1.8em;
+    margin-bottom: 10px;
+  }
+  
+  .detail-card p {
+    font-size: 1.2em;
+  }
+  .detail-card h3, .detail-card p {
+    font-family: 'Lora', serif;
+    color: #333;
+  }
+  
+  .detail-card h3 {
+    font-size: 1.8em;
+    margin-bottom: 10px;
+  }
+  
+  .detail-card p {
+    font-size: 1.2em;
+  }
+
+  .invitee-card p {
+    font-family: 'Quicksand', sans-serif;
+    color: #1a1a1a;
+    font-size: 1.2em;
+    text-align: center;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: #ffd700;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2) inset;
+  }
+
+  .disappear {
+    transform: translateY(-100vh);
+    
+    /* animation-name: fadeAndMoveIn; */
+    opacity: 0;
+  }  
+  
   
   
   @media (max-width: 768px) {
@@ -165,4 +211,20 @@ body, html {
         opacity: 1;
         
     }
+}
+
+@keyframes fadeAndMoveIn {
+  0% {
+      opacity: 1;
+      
+  }
+  
+  50% {
+      opacity: 0.5;
+      
+  }
+  100% {
+    opacity: 0;
+    
+  }
 }

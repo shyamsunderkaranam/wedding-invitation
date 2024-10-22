@@ -1,8 +1,10 @@
 import React, { useEffect, useRef } from 'react';
+import wedding from './data/data';
 import './Invitation.css';
 import './loader.css'
 const Invitation = () => {
   const mainCardsRef = useRef(null);
+  const lastScrollY = useRef(0);
   useEffect(() => {
     const leftCard = document.querySelector('.left-card');
     const rightCard = document.querySelector('.right-card');
@@ -11,6 +13,25 @@ const Invitation = () => {
       leftCard.style.transform = 'translateX(0)';
       rightCard.style.transform = 'translateX(0)';
     }, 500);
+
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      if (currentScrollY > lastScrollY.current) {
+        leftCard.classList.add('disappear');
+        rightCard.classList.add('disappear');
+      } else {
+        leftCard.classList.remove('disappear');
+        rightCard.classList.remove('disappear');
+      }
+      lastScrollY.current = currentScrollY;
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+    /*
     const observerOptions = {
       root: null,
       threshold: 0.1,
@@ -36,15 +57,19 @@ const Invitation = () => {
       if (mainCardsRef.current) {
         observer.unobserve(mainCardsRef.current);
       }
-    };
+    };*/
+
   }, []);
 
-  const bride = { name: "VAISHNAVI", img: "vaishu.jpg" };
-  const groom = { name: "KARTHIK", img: "karthik.jpg" };
-  const venue = { title: "Venue Details", details: "Location, Address" };
-  const date = { title: "Wedding Date", details: "Date and Time" };
-  const invitees = ["Invitee 1", "Invitee 2"]; // Add more invitees as needed
-
+  // const bride = { name: "VAISHNAVI", img: "vaishu.jpg" };
+  // const groom = { name: "KARTHIK", img: "karthik.jpg" };
+  // const venue = { title: "Sri Siddi Vinayaka Temple", 
+  //   details: "Rejinthal Village,Zaheerabad, Mirzapur[B], Telangana 502249", 
+  //   map: "https://maps.app.goo.gl/Vwajr2koTKJmPEmV7"
+  // };
+  // const date = { title: 'Date & Time:', details: "8th December 2024 and Muhurtham time" };
+  // const invitees = ["KULKARNI'S FAMILY"]; // Add more invitees as needed
+  const {bride, groom, venue, date, invitees} = wedding;
   return (
     <div className="App">
       <header className="header">
@@ -68,8 +93,10 @@ const Invitation = () => {
         </section>
         <section className="details">
           <div className="card detail-card">
-            <h3>{venue.title}</h3>
+            <h3>Venue:</h3>
+            <p>{venue.title}</p>
             <p>{venue.details}</p>
+            <a href={venue.map} target="_blank" rel="noreferrer">View on Map</a>
           </div>
           <div className="card detail-card">
             <h3>{date.title}</h3>
